@@ -4,5 +4,6 @@
 *docker-compose*
 .dockerignore
 node_modules
+dist
 LICENSE
 *.yaml
