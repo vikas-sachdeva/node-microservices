@@ -1,6 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
 
-import * as service from "./../services/itemService"
+import * as service from "./../services/ItemService"
 
 export class ItemRoute {
     
