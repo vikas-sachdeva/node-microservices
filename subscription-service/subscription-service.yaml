@@ -22,9 +22,9 @@ spec:
         run: subscription-svc
     spec:
       containers:
-      - image: subscription-svc:v1
+      - image: subscription-service:1.0
         imagePullPolicy: IfNotPresent
-        name: subscription-svc
+        name: subscription-service
         ports:
         - containerPort: 3000
       dnsPolicy: ClusterFirst

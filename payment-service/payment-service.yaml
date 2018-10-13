@@ -22,9 +22,9 @@ spec:
         run: payment-svc
     spec:
       containers:
-      - image: payment-svc:v1
+      - image: payment-service:1.0
         imagePullPolicy: IfNotPresent
-        name: payment-svc
+        name: payment-service
         ports:
         - containerPort: 3000
       dnsPolicy: ClusterFirst
