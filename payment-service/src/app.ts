@@ -24,7 +24,7 @@ class App {
     }
 
     private routes(): void {
-        this._app.use('/payment', appRoute.route);
+        this._app.use('/api/payment/', appRoute.route);
 
     }
 

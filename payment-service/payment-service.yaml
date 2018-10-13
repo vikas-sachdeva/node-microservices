@@ -37,6 +37,15 @@ metadata:
     run: payment-svc
   name: payment-svc
   namespace: default
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  fws-payment_mapping
+      prefix: /payment/
+      rewrite: /api/payment/
+      service: payment-svc
 spec:
   ports:
   - port: 80

@@ -24,7 +24,7 @@ class App {
     }
 
     private routes(): void {
-        this._app.use('/getAllItems', appRoute.route);
+        this._app.use('/api/subscription/getAllItems', appRoute.route);
     }
 
     public get app() : express.Application {

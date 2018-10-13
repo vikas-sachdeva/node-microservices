@@ -37,6 +37,15 @@ metadata:
     run: subscription-svc
   name: subscription-svc
   namespace: default
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  fws-subscription_mapping
+      prefix: /subscription/
+      rewrite: /api/subscription/
+      service: subscription-svc
 spec:
   ports:
   - port: 80
