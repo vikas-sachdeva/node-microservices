@@ -1,0 +1,105 @@
+1) Disable SELinux and firewalld -
+	
+	a) Open the /etc/selinux/config file and set the SELINUX to disabled.
+	
+	b) Disable firewall	
+		systemctl disable firewalld
+	
+	2) Reboot system - 
+			shutdown -r now
+	
+2) Install docker
+
+	curl -fsSL https://get.docker.com -o get-docker.sh
+	sh get-docker.sh
+	
+	systemctl start docker
+	systemctl enable docker
+	
+3) Disable swapoff -
+		
+		swapoff -a
+		
+4) Install Kubectl binary -
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+	yum install -y kubectl
+
+5) Install Minikube -
+
+	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.30.0/minikube-linux-amd64 && chmod +x minikube && cp minikube /usr/local/bin/ && rm -f minikube
+	
+6) Star minikube -
+
+	minikube start --vm-driver=none --apiserver-ips 127.0.0.1 --apiserver-name localhost
+	
+7) Check minikube status -
+		
+	minikube status
+	
+8) Build docker container for services -
+
+		git clone https://github.com/vikas-sachdeva/node-microservices.git
+		
+		cd /root/node-microservices/subscription-service/
+
+		docker build --no-cache ./ -t subscription-service:1.0
+		
+		cd /root/node-microservices/payment-service/
+		
+		docker build --no-cache ./ -t payment-service:1.0
+		
+9) Add services in kubectl -
+
+		kubectl apply -f /root/node-microservices/subscription-service/subscription-service.yaml
+		
+		kubectl apply -f /root/node-microservices/payment-service/payment-service.yaml
+		
+10) Check all servies and pods -
+
+		kubectl get services
+		
+		kubectl get pods
+		
+		kubectl get deployment
+		
+11) Remove service -
+
+		kubectl delete service subscription-svc
+		kubectl delete deployment subscription-svc
+		
+12) Check logs -
+
+		kubectl logs <podName>
+		
+13) Add ambassador as api gateway  -
+
+		kubectl apply -f /root/node-microservices/ambassador/ambassador.yaml
+
+14) Check logs -
+
+			kubectl logs <podName> -c <containerName>
+			
+	e.g. 
+			 kubectl logs ambassador-7ffddb4745-9ggjd -c ambassador
+
+15) Get URL -
+
+		 minikube service ambassador --url
+		
+		http://10.0.2.15:32585
+		
+kubectl logs kube-dns-6f4fd4bdf-nr5tt -n kube-system kubedns
+
+kubectl describe pod ambassador-64dcb6694f-4jsp2 -n=kubeflow
+
+kubectl logs kube-dns-86f4d74b45-4rzrq -n kube-system kubedns
