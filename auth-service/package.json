@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node dist/Server.js",
     "build": "tsc",
-    "watch": "tsc-watch --onSuccess \"npm run start\""
+    "eslint": "tsc",
+    "watch": "tsc-watch --onSuccess \"npm run start\"",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "tslint-fix": "tslint --fix -c tslint.json -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +26,8 @@
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "dotenv": "^6.1.0",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "tslint": "^5.11.0",
+    "winston": "^3.1.0"
   }
 }
