@@ -1,0 +1,57 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: payment-gateway-svc
+  name: payment-gateway-svc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: payment-gateway-svc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: payment-gateway-svc
+    spec:
+      containers:
+      - image: payment-gateway-service:1.0
+        imagePullPolicy: IfNotPresent
+        name: payment-gateway-service
+        ports:
+        - containerPort: 3000
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: payment-gateway-svc
+  name: payment-gateway-svc
+  namespace: default
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  fws-payment-gateway_mapping
+      prefix: /payment-gateway/
+      rewrite: /api/payment-gateway/
+      service: payment-gateway-svc
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    run: payment-gateway-svc
+  sessionAffinity: None
+  type: ClusterIP
