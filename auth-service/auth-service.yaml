@@ -47,7 +47,7 @@ metadata:
       kind:  Module
       name:  authentication
       config:
-        auth_service: "auth-svc:3000"
+        auth_service: "auth-svc:80"
 spec:
   ports:
   - port: 80
