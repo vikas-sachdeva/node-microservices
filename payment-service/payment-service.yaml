@@ -25,6 +25,9 @@ spec:
       - image: payment-service:1.0
         imagePullPolicy: IfNotPresent
         name: payment-service
+        env:
+        - name: PAYMENT_GATEWAY_URI
+          value: http://payment-gateway-svc.default.svc.cluster.local 
         ports:
         - containerPort: 3000
       dnsPolicy: ClusterFirst

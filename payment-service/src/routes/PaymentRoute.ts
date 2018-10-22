@@ -17,11 +17,11 @@ export class PaymentRoute {
     this.init();
   }
 
-    public startPayment(req: Request, res: Response, next: NextFunction): void {
+    public async startPayment(req: Request, res: Response, next: NextFunction): Promise<void> {
         appLogger.info("Request received for starting payment");
         const itemId = req.params.itemId;
         const paymentService = new PaymentService();
-        const status = paymentService.startPayment(itemId);
+        const status = await paymentService.startPayment(itemId);
         if ( status === true) {
             res.send("Payment started for item " + itemId);
         } else {
@@ -31,11 +31,11 @@ export class PaymentRoute {
 
     }
 
-    public stopPayment(req: Request, res: Response, next: NextFunction): void {
+    public async stopPayment(req: Request, res: Response, next: NextFunction): Promise<void> {
         appLogger.info("Request received for stopping payment");
         const itemId = req.params.itemId;
         const paymentService = new PaymentService();
-        const status = paymentService.stopPayment(itemId);
+        const status = await paymentService.stopPayment(itemId);
         if ( status === true) {
             res.send("Payment stopped for item " + itemId);
         } else {
