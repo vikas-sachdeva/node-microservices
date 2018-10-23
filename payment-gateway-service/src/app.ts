@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser";
 import * as compression from "compression";
 import * as express from "express";
-import appRoute from "./routes/AuthRoute";
+import appRoute from "./routes/PaymentGRoute";
 
 import { NextFunction, Request, Response } from "express";
 
@@ -24,7 +24,8 @@ class App {
     }
 
     private routes(): void {
-        this._app.use(appRoute.route);
+        this._app.use("/api/payment-gateway/", appRoute.route);
+
     }
 
     public get app(): express.Application {

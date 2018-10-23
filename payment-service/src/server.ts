@@ -1,23 +1,23 @@
-import app from "./app";
-
-
+import app from "./App";
+import appLogger from "./AppLogger";
 
 class Server {
 
     constructor() {
         this.init();
     }
-        
-    private init() : void{ 
+
+    private init(): void {
         require("dotenv").config();
     /**
-    * Start Express server.
-    */
-        app.listen("3000", () => {
-            console.log(("  App is running at http://localhost:%d in %s mode"), app.get("port"), app.get("env"));
-            console.log("  Press CTRL-C to stop\n");
+     * Start Express server.
+     */
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+            appLogger.info(("App is running at http://localhost:" + port));
+            appLogger.info("Press CTRL-C to stop\n");
           });
     }
 }
 
-new Server();
+const server = new Server();
