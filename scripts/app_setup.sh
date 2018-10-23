@@ -66,6 +66,13 @@ if [[ $? -ne 0 ]]; then
 	exit -1
 fi
 
+kubectl apply -f /root/node-microservices/payment-gateway-service/payment-gateway-service.yaml
+
+if [[ $? -ne 0 ]]; then
+    printf "Error occurred while adding payment-gateway-service to kubectl."
+	exit -1
+fi
+
 kubectl apply -f /root/node-microservices/auth-service/auth-service.yaml
 
 if [[ $? -ne 0 ]]; then
