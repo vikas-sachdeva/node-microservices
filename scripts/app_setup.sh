@@ -19,11 +19,12 @@ yum update -y
 printf "Installing git..."
 yum install -y git
 
-if [[ -d /root/node-microservices/ ]]; then
+cd /root/
+
+if [[ -d node-microservices/ ]]; then
 	printf "Source code is alredy cloned."
 else
-	printf "Cloning source code..."
-    cd /root/
+	printf "Cloning source code..."    
     git clone https://github.com/vikas-sachdeva/node-microservices.git
 fi
 
