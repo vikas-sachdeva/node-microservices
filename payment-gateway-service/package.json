@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node dist/Server.js",
     "build": "tsc",
     "watch": "tsc-watch --onSuccess \"npm run start\"",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
