@@ -43,6 +43,15 @@ if [[ $? -ne 0 ]]; then
 fi
 
 cd ..
+cd payment-gateway-service/
+docker build --no-cache ./ -t payment-gateway-service:1.0
+
+if [[ $? -ne 0 ]]; then
+    printf "Failed to build payment-gateway-service docker image."
+	exit -1
+fi
+
+cd ..
 cd auth-service/
 docker build --no-cache ./ -t auth-service:1.0
 
