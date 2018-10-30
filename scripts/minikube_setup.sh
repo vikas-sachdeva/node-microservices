@@ -97,14 +97,16 @@ if [[ $? -ne 0 ]]; then
 		printf "minikube started successfully.\n"
 fi
 
+sleep 300
+
 printf "Checking minikube status..."
 minikube status
 
 printf "Checking minikube services..."
-minikube get services
+kubectl get services
 
 printf "Checking minikube deployment..."
-minikube get deployment
+kubectl get deployment
 
 printf "Checking minikube pods..."
-minikube get pods
+kubectl get pods
