@@ -3,10 +3,17 @@ import * as winston from "winston";
 class AppLogger {
 
       private _logger: winston.Logger;
+
       constructor() {
-      this._logger = winston.createLogger({
-        format : winston.format.json(),
-        level : "info",
+        this._logger = winston.createLogger({
+        format : winston.format.combine(
+          winston.format.timestamp({
+            format: "YYYY-MM-DD HH:mm:ss,SSS",
+          },
+          ),
+          winston.format.printf((i) => `${i.timestamp}  [${i.level}]  ${i.message}`),
+        ),
+        level : "debug",
         transports: [
           new winston.transports.Console(),
         ],

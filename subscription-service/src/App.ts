@@ -3,8 +3,6 @@ import * as compression from "compression";
 import * as express from "express";
 import appRoute from "./routes/ItemRoute";
 
-import { NextFunction, Request, Response } from "express";
-
 class App {
 
     private _app: express.Application;

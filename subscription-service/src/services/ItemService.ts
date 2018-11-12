@@ -1,8 +1,10 @@
+import appLogger from "./../AppLogger";
 import * as model from "./../models/Item";
 
 export class ItemService {
 
     public getAllItems(): model.Item[] {
+        appLogger.debug("Entering into getAllItems() function");
         const itemList: model.Item[] = [
 
             new model.Item("id1", "item1"),

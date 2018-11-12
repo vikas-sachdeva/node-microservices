@@ -17,7 +17,7 @@ export class ItemRoute {
     this.init();
   }
     public getAllItems(req: Request, res: Response, next: NextFunction): void {
-        appLogger.info("Request received for getAllItems");
+        appLogger.debug("Request received for getAllItems");
         const itemService = new service.ItemService();
         res.send(itemService.getAllItems());
     }
